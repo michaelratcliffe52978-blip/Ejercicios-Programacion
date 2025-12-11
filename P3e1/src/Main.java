@@ -18,7 +18,7 @@ public class Main {
                 mostrarJugadores();
                 System.out.println("¿Quieres continuar añadiendo jugadores? (s/n): ");
                 opcion = sc.nextLine().toLowerCase();
-            } while (opcion.equals("s"));
+            } while (opcion.equals("s") || opcion.equals("si"));
 
             System.out.println("M O D I F I C A C I O N E S:");
             System.out.println("Introduce '1' para dar de alta, '2' para dar de baja, '3' para modificar, '4' para salir");
