@@ -18,13 +18,13 @@ public class Main {
                 mostrarJugadores();
                 System.out.println("¿Quieres continuar añadiendo jugadores? (s/n): ");
                 opcion = sc.nextLine().toLowerCase();
-            } while(opcion.equals("s"));
+            } while (opcion.equals("s"));
 
             System.out.println("M O D I F I C A C I O N E S:");
             System.out.println("Introduce '1' para dar de alta, '2' para dar de baja, '3' para modificar, '4' para salir");
             int nmenu;
             do {
-                switch (nmenu= sc.nextInt()) {
+                switch (nmenu = sc.nextInt()) {
                     case 1:
                         alta();
                         break;
@@ -39,8 +39,8 @@ public class Main {
                     default:
                         System.out.println("Opcion invalida");
                 }
-            }while(nmenu==4);
-        }catch (Exception e){
+            } while (nmenu == 4);
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
@@ -50,7 +50,7 @@ public class Main {
         String nombre = sc.nextLine();
 
         boolean existeJugador = true;
-        do{
+        do {
             try {
                 System.out.print("Introduce la posición del jugador (portero|defensa|centrocampista|delantero): ");
                 String rol = sc.nextLine().toLowerCase();
@@ -69,13 +69,13 @@ public class Main {
                     }
 
                     existeJugador = false;
-                }else {
+                } else {
                     throw new Exception();
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("ERROR: tiene que contener");
             }
-        }while(existeJugador);
+        } while (existeJugador);
 
     }
 
@@ -86,7 +86,8 @@ public class Main {
         System.out.println("Delanteros: " + delanteros);
     }
 
-    public static void alta(){
+    public static void alta() {
+        sc.nextLine();
         System.out.print("Introduce el nombre del nuevo jugador: ");
         String nombre = sc.nextLine();
 
@@ -95,35 +96,74 @@ public class Main {
         System.out.println("2. Defensa");
         System.out.println("3. Centrocampista");
         System.out.println("4. Delantero");
-        System.out.print("Opción: ");
-        String rol = sc.nextLine();
-
-
-        switch (rol) {
-            case "1" -> porteros.add(nombre);
-            case "2" -> defensas.add(nombre);
-            case "3" -> centrocampistas.add(nombre);
-            case "4" -> delanteros.add(nombre);
-            default -> System.out.println("Opción no válida, no se añadió el jugador.");
-        }
-        System.out.println("Jugador añadido correctamente.");
+        boolean existeJugador = true;
+        do {
+            try {
+                System.out.print("Opción: ");
+                int rol = sc.nextInt();
+                if (rol == 1 || rol == 2 || rol == 3 || rol == 4) {
+                    existeJugador = false;
+                } else {
+                    throw new Exception();
+                }
+                switch (rol) {
+                    case 1 -> porteros.add(nombre);
+                    case 2 -> defensas.add(nombre);
+                    case 3 -> centrocampistas.add(nombre);
+                    case 4 -> delanteros.add(nombre);
+                    default -> System.out.println("Opción no válida, no se añadió el jugador.");
+                }
+                System.out.println("Jugador añadido correctamente.");
+                existeJugador = false;
+            } catch (Exception e) {
+                System.out.println("ERROR: vuelve a elegir.");
+                sc.nextLine();
+            }
+        } while (existeJugador);
+        mostrarJugadores();
     }
 
-    public static void baja(){
+    public static void baja() {
+        sc.nextLine();
         System.out.println("Introduce el nombre del jugador que quieres dar de baja: ");
         String nombreBaja = sc.nextLine();
 
-        Set<String> borrarJug = new HashSet<>();
-        if (borrarJug.contains(nombreBaja)) {
-            borrarJug.remove(nombreBaja);
+        if (porteros.remove(nombreBaja) ||
+                defensas.remove(nombreBaja) ||
+                centrocampistas.remove(nombreBaja) ||
+                delanteros.remove(nombreBaja)) {
             System.out.println("Jugador eliminado correctamente.");
         } else {
-            System.out.println("Ese jugador no existe en ese rol.");
+            System.out.println("Ese jugador no existe.");
         }
-
+        mostrarJugadores();
     }
 
-    public static void modificaciones(){
+    public static void modificaciones() {
+        sc.nextLine();
+        System.out.println("Introduce el nombre del jugador que quieres modificar: ");
+        String nombreModificado = sc.nextLine();
+
+        boolean existeJugador = true;
+        do {
+            try {
+                if (porteros.contains(nombreModificado) ||
+                    defensas.contains(nombreModificado) ||
+                    centrocampistas.contains(nombreModificado) ||
+                    delanteros.contains(nombreModificado))
+                {
+
+
+                existeJugador = false;
+                }else{
+                    System.out.println("Jugador no encontrado.");
+                }
+            }catch (Exception e) {
+                System.out.println("ERROR: vuelve a elegir.");
+                sc.nextLine();
+            }
+        }while (existeJugador);
+
 
     }
 }
