@@ -9,7 +9,7 @@ public class Main {
     private static Set<String> defensas = new HashSet<>();
     private static Set<String> centrocampistas = new HashSet<>();
     private static Set<String> delanteros = new HashSet<>();
-
+    private static String nombre;
     public static void main(String[] args) {
         try {
             String opcion;
@@ -47,7 +47,7 @@ public class Main {
 
     public static void anadirJugador() {
         System.out.print("Introduce el nombre del jugador: ");
-        String nombre = sc.nextLine();
+        nombre = sc.nextLine();
 
         boolean existeJugador = true;
         do {
@@ -152,11 +152,55 @@ public class Main {
                     centrocampistas.contains(nombreModificado) ||
                     delanteros.contains(nombreModificado))
                 {
+                    System.out.println("¿Quieres cambiarle el nombre? ( si / no )");
+                    String siNo = sc.nextLine();
+                    if(siNo.equalsIgnoreCase("si")||siNo.equalsIgnoreCase("s")){
+                        System.out.println("Escribe el nuevo nombre:");
+                        String nuevoNombre = sc.nextLine();
 
+                        if (porteros.remove(nombreModificado)) {
+                            porteros.add(nuevoNombre);
+                        }else if (defensas.remove(nombreModificado)) {
+                            defensas.add(nuevoNombre);
+                        }else if (centrocampistas.remove(nombreModificado)) {
+                            centrocampistas.add(nuevoNombre);
+                        }else if (delanteros.remove(nombreModificado)) {
+                            delanteros.add(nuevoNombre);
+                        }
+                    }else {
+                        System.out.println("Se dá por hecho que no quieres modificar el nombre.");
+                    }
+                        mostrarJugadores();
 
-                existeJugador = false;
+                    System.out.println("¿Quieres cambiarle el rol de tu jugador? ( si / no )");
+                    String noSi = sc.nextLine();
+                    if(noSi.equalsIgnoreCase("si")||noSi.equalsIgnoreCase("s")){
+                        System.out.println("Escribe el nuevo rol del jugador (portero / defensa / centrocampista / delantero):");
+                        String nuevoRol = sc.nextLine();
+
+                        porteros.remove(nombreModificado);
+                        defensas.remove(nombreModificado);
+                        centrocampistas.remove(nombreModificado);
+                        delanteros.remove(nombreModificado);
+
+                        switch (nuevoRol) {
+                            case "portero" -> porteros.add(nombreModificado);
+                            case "defensa" -> defensas.add(nombreModificado);
+                            case "centrocampista" -> centrocampistas.add(nombreModificado);
+                            case "delantero" -> delanteros.add(nombreModificado);
+                            default -> {
+                                System.out.println("Rol no válido. No se hicieron cambios.");
+                                return;
+                            }
+                        }
+                    }else {
+                        System.out.println("Se dá por hecho que no quieres modificar el rol de tu jugador.");
+                    }
+                    mostrarJugadores();
+                    existeJugador = false;
                 }else{
                     System.out.println("Jugador no encontrado.");
+                    sc.nextLine();
                 }
             }catch (Exception e) {
                 System.out.println("ERROR: vuelve a elegir.");
