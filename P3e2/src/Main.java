@@ -26,24 +26,30 @@ public class Main {
     }
 
     public static void principal() {
-        System.out.print("Introduce el nombre del producto: ");
-        nombreProductos.offer(sc.nextLine());
 
-        boolean errorFecha = true;
+        boolean error = true;
         do {
             try {
+                System.out.print("Introduce el nombre del producto: ");
+                String nombreProducto = sc.nextLine().trim();
+
+                if (nombreProducto.isEmpty()) {
+                    throw new Exception("No puede estar vacio");
+                }
+                nombreProductos.offer(nombreProducto);
+
                 System.out.print("Introduce la fecha de caducidad del producto (dd/MM/yyyy): ");
-                String fecha = sc.nextLine();
+                String fecha = sc.nextLine().trim();
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 LocalDate date = LocalDate.parse(fecha, formatter);
 
                 fechaCaducidad.offer(date);
-                errorFecha = false;
+                error = false;
             } catch (Exception e) {
-                System.out.println("Error al escribir la fecha, formato incorrecto.");
+                System.out.println("ERROR: intenleo de nuevo.");
             }
-        } while (errorFecha);
+        } while (error);
     }
 
     public static void fecha() {
