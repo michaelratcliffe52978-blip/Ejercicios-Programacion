@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class Main {
     private static final Scanner sc = new Scanner(System.in);
 
-    // Colas paralelas
     private static Queue<LocalDate> fechaCaducidad = new LinkedList<>();
     private static Queue<String> nombreProductos = new LinkedList<>();
 
@@ -17,8 +16,8 @@ public class Main {
             do {
                 principal();
                 System.out.println("¿Quieres continuar añadiendo productos? (s/n): ");
-                opcion = sc.nextLine().toLowerCase();
-            } while (opcion.equals("s") || opcion.equals("si"));
+                opcion = sc.nextLine().toLowerCase().trim();
+            } while (opcion.equals("s") || opcion.equals("si") || opcion.equals("sí"));
 
             fecha();
         } catch (Exception e) {
@@ -39,7 +38,7 @@ public class Main {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 LocalDate date = LocalDate.parse(fecha, formatter);
 
-                fechaCaducidad.offer(date); // <-- AQUÍ guardamos la fecha
+                fechaCaducidad.offer(date);
                 errorFecha = false;
             } catch (Exception e) {
                 System.out.println("Error al escribir la fecha, formato incorrecto.");
@@ -54,7 +53,6 @@ public class Main {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate fechaLimite = LocalDate.parse(fechaEliminar, formatter);
 
-        // Colas temporales para dejar solo los productos NO caducados
         Queue<LocalDate> nuevasFechas = new LinkedList<>();
         Queue<String> nuevosProductos = new LinkedList<>();
 
@@ -70,7 +68,6 @@ public class Main {
             }
         }
 
-        // Reemplazamos las colas originales
         fechaCaducidad = nuevasFechas;
         nombreProductos = nuevosProductos;
 
