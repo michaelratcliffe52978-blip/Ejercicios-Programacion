@@ -5,7 +5,7 @@ import java.util.Stack;
 
 public class Main {
     private static final Scanner sc = new Scanner(System.in);
-    private static Deque<String> libros = new ArrayDeque<>();
+    private static Stack<String> libros = new Stack<>();
     private static String nombreLibro;
     public static void main(String[] args) {
         try {
@@ -67,7 +67,7 @@ public class Main {
                 nombreLibro = sc.nextLine().trim();
 
                 if(nombreLibro.isEmpty()){
-                    throw new ExcepcionNombre();
+                    throw new Exception();
                 }
 
                 libros.push(nombreLibro);
@@ -76,7 +76,7 @@ public class Main {
 
                 System.out.print("¿Quieres continuar? ( s / n ): ");
                 opcion = sc.nextLine().trim();
-            }catch (ExcepcionNombre e){
+            }catch (Exception e){
                 System.err.println("Error al intentar anadir al libro, vuelve a intentarlo.");
             }
         }while (opcion.equalsIgnoreCase("s") || opcion.equalsIgnoreCase("si"));
