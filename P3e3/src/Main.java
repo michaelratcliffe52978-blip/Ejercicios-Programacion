@@ -11,26 +11,31 @@ public class Main {
                 switch (opcion) {
                     case "a":
                     case "a)":
-
+                        break;
                     case "b":
                     case "b)":
 
+                        break;
                     case "c":
                     case "c)":
 
+                        break;
                     case "d":
                     case "d)":
 
+                        break;
                     case "e":
                     case "e)":
 
+                        break;
                     case "f":
                     case "f)":
                         System.out.println("Saliendo del programa...");
+                        break;
 
                     default: System.out.println("Opción no valida. Por favor, elija una opción entre a y f.");
                 }
-            }while(!opcion.equals("f"));
+            }while(!opcion.equals("f") &&  !opcion.equals("f)"));
         }catch (Exception e){
             System.err.println(e.getMessage());
         }
