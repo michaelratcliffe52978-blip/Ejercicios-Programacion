@@ -10,6 +10,7 @@ public class Main {
     private static Set<String> centrocampistas = new HashSet<>();
     private static Set<String> delanteros = new HashSet<>();
     private static String nombre;
+
     public static void main(String[] args) {
         try {
             String opcion;
@@ -64,10 +65,9 @@ public class Main {
                         centrocampistas.add(nombre);
                     } else if (rol.contains("delantero")) {
                         delanteros.add(nombre);
-                    } else {
-                        System.out.println("Posición no reconocida.");
-                    }
-
+                } else {
+                    System.out.println("Posición no reconocida.");
+                }
                     existeJugador = false;
                 } else {
                     throw new Exception();

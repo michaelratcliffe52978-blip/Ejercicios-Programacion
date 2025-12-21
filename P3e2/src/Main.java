@@ -67,7 +67,7 @@ public class Main {
             String p = nombreProductos.poll();
 
             if (f.isBefore(fechaLimite)) {
-                System.out.println("Producto eliminado por caducado: " + p + " (caducó: " + f + ")");
+                System.out.println("\nProducto eliminado por caducado: " + p + " (caducó: " + f + ")");
             } else {
                 nuevasFechas.offer(f);
                 nuevosProductos.offer(p);
@@ -77,7 +77,7 @@ public class Main {
         fechaCaducidad = nuevasFechas;
         nombreProductos = nuevosProductos;
 
-        System.out.println("\nProductos que siguen en la cola:"+ nombreProductos);
+        System.out.println("Productos que siguen en la cola:"+ nombreProductos);
 
     }
 }
