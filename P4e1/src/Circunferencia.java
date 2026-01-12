@@ -1,4 +1,4 @@
-public class Datos {
+public class Circunferencia {
     //Atributos
     private int radio;
     private double longitud;
@@ -7,7 +7,7 @@ public class Datos {
 
 
     //Constructor
-    public Datos(int radio) {
+    public Circunferencia(int radio) {
         this.radio = radio;
     }
     //Getter and Setter
