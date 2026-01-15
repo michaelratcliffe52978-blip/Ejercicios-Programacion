@@ -11,7 +11,7 @@ public class Estudio {
     private String telefono;
 
     //Constructor
-    public Estudio() {
+    public Estudio(int codigo, String nombre, String domicilio, int telefono) {
     }
     public Estudio(String nombre, String ciudad, String direccion, String direccionWeb,
                    LocalDate fechaFundacion, String pais, String telefono) {
