@@ -1,9 +1,7 @@
 import Modulo.Coche;
 import Modulo.Propietario;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Main {
     public static void main(String [] args) {
@@ -114,12 +112,83 @@ public class Main {
                 ;
         System.out.println("¿ Hay BMW ? "+ buscar);
 
-
         for(Coche c : coches) {
             if(c.getMarca().equalsIgnoreCase("BMW")){
                 System.out.println("Marca: " + c.getMarca() + " - " + c.getAno());
             }
         }
+        System.out.println("_____________________________________________________");
+        //7. Obtener lista de coches ordenados por precio (ascendente).
+        List<Coche> cochesOrdenados = coches.stream()
+                .sorted(Comparator.comparingDouble(Coche::getPrecio))
+                .toList();
+        cochesOrdenados.forEach(c ->
+                System.out.println(c.getMatricula()+" - " + c.getPrecio()+" euros"));
+
+        System.out.println("_____________________________________________________");
+        //8. Obtener el coche mas antiguo.
+        Coche cocheMasAntiguo = coches.stream()
+                .min(Comparator.comparingInt(Coche::getAno))
+                .orElse(null);
+
+        System.out.println("Coche más antiguo: "+cocheMasAntiguo.getMatricula() + " - " + cocheMasAntiguo.getAno());
+
+        Coche cocheAntiguo = coches.get(0);
+        for(Coche c : coches) {
+            if(c.getAno() < cocheAntiguo.getAno()){
+                cocheAntiguo = c;
+            }
+        }
+        System.out.println("Coche más antiguo: ");
+        System.out.println(cocheAntiguo.getMatricula() + " - " + cocheAntiguo.getAno());
+
+        System.out.println("_____________________________________________________");
+        //9. Contar coches que cuestan mas de 20.000.
+        List<Coche> cochesCaros = coches.stream()
+                .filter(c-> c.getPrecio()>=20000)
+                .toList();
+        System.out.println("Coches que cuestan mas de 20.000: ");
+        cochesCaros.forEach(c -> System.out.println(c.getMatricula() + " - " + c.getPrecio()));
+        System.out.println(" ");
+        for (Coche c : coches) {
+            if (c.getPrecio() >= 20000) {
+                System.out.println(c.getMatricula() + " - " + c.getPrecio());
+            }
+        }
+        System.out.println("_____________________________________________________");
+        //10. Obtener las marcas sin repetir.
+        List<String> marcas = coches.stream()
+                .map(Coche::getMarca)   // saco solo la marca
+                .distinct()
+                .toList();
+        System.out.println("Marcas: "+marcas);
+
+        List<String> marcass = new ArrayList<>();
+        for (Coche c : coches) {
+            String marca = c.getMarca();
+            if (!marcass.contains(marca)) { // si no está en la lista, la agrego
+                marcass.add(marca);
+            }
+        }
+        System.out.println("Marcas sin repetir: " + marcass);
+
+        //11. Crear un Map con matricula y precio.
+        Map<String, Integer> matriculaPrecio =new HashMap<>();
+
+
+        //12. Agrupar coches por marca.
+
+
+        //20.
+        List<Coche> listaOrdenada = new ArrayList<>();
+        List<Coche> listaDesordenada = new ArrayList<>();
+        for (Coche c : coches) {
+
+        }
+
+        List<Coche> ordenados = coches;
+
+        //21.
 
     }
 }
