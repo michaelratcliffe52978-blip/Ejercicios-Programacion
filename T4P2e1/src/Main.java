@@ -8,7 +8,6 @@ public class Main {
     private static ArrayList<Pelicula> listaPeliculas;
     private static Estudio[] arrayEstudios;
 
-
     public static void main(String[] args) {
         try {
             crearEstudios();

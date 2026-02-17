@@ -43,7 +43,7 @@ public class Pelicula {
     public void setEstudios(List<Estudio> estudios) {this.estudios = estudios;}
 
     //METODO PARA AÑADIR UN ESTUDIO
-    public void anadirEstudio(Estudio estudio) {
+    public void anadirEstudio(Estudio estudIo) {
         if (estudio != null) {
             this.estudios.add(estudio);
         }
