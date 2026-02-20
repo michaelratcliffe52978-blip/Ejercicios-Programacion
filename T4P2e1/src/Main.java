@@ -66,6 +66,7 @@ public class Main {
         for (Pelicula p : listaPeliculas) {
             if (p.getDuracionM() > masLarga.getDuracionM()) {
                 masLarga = p;
+
             }
         }
         System.out.println("Película más larga: " + masLarga.getTitulo());

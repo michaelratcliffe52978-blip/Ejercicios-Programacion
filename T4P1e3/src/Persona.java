@@ -7,6 +7,7 @@ public class Persona {
     private int dNacimiento;
     private int mNacimiento;
     private int aNacimiento;
+
     private String direccion;
     private String codigoPostal;
     private String ciudad;

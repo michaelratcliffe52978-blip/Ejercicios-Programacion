@@ -84,7 +84,6 @@ public class Main {
                 map.put(nombre, tel);
                 System.out.println("Contacto añadido correctamente.");
 
-
                 System.out.println("¿Quieres añadir otro contacto? (si/no)");
                 siNo = sc.next().trim().toLowerCase();
             }catch (ExcepcionContacto e){
@@ -143,7 +142,6 @@ public class Main {
         }else{
             System.out.println("No existe ningún contacto con ese nombre.");
         }
-
 
     }
 

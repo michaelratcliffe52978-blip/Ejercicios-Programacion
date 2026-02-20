@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 public class Main {
     private final static Scanner sc = new Scanner(System.in);
-    private static String nombre, email;
+    private static String nombre, email, nombreUsuario;
     private static ArrayList<Producto> productos = new ArrayList<>();
     private static ArrayList<Usuario> usuarios = new ArrayList<>();
     private static ArrayList<Pedido> pedidos = new ArrayList<>();
@@ -66,13 +66,14 @@ public class Main {
         boolean continuar = true;
         do {
             System.out.println("\nDAR DE ALTA USUARIO");
-            nombre = validarDato("nombre", "Escribe el nombre del usuario: ", "^[A-Za-z ]+$");
+            nombre = validarDato("nombre", "Escribe el nombre del usuario: ", "^[A-Z][a-z ]{1,}+$");
             email = validarEmail("email", "Escribe el email: ", "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
 
             Usuario u = new Usuario(nombre,email,pedidos);
             usuarios.add(u);
 
             System.out.println("✅ Usuario registrado: " + nombre + " (" + email + ")");
+
 
             System.out.print("\n¿Deseas dar de alta otro usuario? (s/n): ");
             String respuesta = sc.nextLine().trim().toLowerCase();
@@ -94,8 +95,7 @@ public class Main {
 
         boolean continuar = true;
         do {
-            System.out.print("Escriba tu nombre de usuario: ");
-            String nombreUsuario= sc.nextLine();
+            nombreUsuario= validarDato("nombreUsuario","Escriba tu nombre de usuario: ", "^[A-Za-z ]+$");
 
             for(Usuario u : usuarios){
                 if(u.getNombre().equalsIgnoreCase(nombreUsuario)){
@@ -119,17 +119,15 @@ public class Main {
                          //Comprobar stock
                          if(productoSeleccionado.getStock()<=0){
                              System.out.println("❌ No hay stock disponible.");
+                         }else {
+                             //Crear Pedido
+                             Pedido pedidido = new Pedido(u,productoSeleccionado,LocalDate.now());
+                             pedidos.add(pedidido);
+
+                             productoSeleccionado.setStock(productoSeleccionado.getStock()-1);
+
+                             System.out.println("✅ Pedido realizado correctamente.");
                          }
-
-                         //Crear Pedido
-                        Pedido pedidido = new Pedido(u,productoSeleccionado,LocalDate.now());
-                        pedidos.add(pedidido);
-
-                        productoSeleccionado.setStock(productoSeleccionado.getStock()-1);
-
-                    System.out.println("✅ Pedido realizado correctamente.");
-
-
 
                 }else{
                     System.out.println("Usuario '"+nombreUsuario+"' no encontrado.");
@@ -139,9 +137,6 @@ public class Main {
 
         }while(continuar);
     }
-
-
-
 
     //VALIDACIONES
     public static String validarDato(String dato, String frase, String formato){

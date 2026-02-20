@@ -33,7 +33,7 @@ public class Main {
                 nombreMayor = p.getNombre();
             }
         }
-        System.out.println("Persona de mayor edad: " + nombreMayor + " (" + edadMax + " años)");
+        System.out.println("\nPersona de mayor edad: " + nombreMayor + " (" + edadMax + " años)");
 
         //2.
         System.out.println("\nPersonas que viven en Elche:");

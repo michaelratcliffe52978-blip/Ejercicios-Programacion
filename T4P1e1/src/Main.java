@@ -13,19 +13,19 @@ public class Main {
                 if(radio < 0){
                     throw new ExceptionRadio();
                 }
+                Circunferencia d1 = new Circunferencia(radio);
+                d1.CalculoDeLongitud();
+                System.out.println(d1.getLongitud());
+                d1.CalculoDeArea();
+                System.out.println(d1.getArea());
+                d1.CalculoDeVolumen();
+                System.out.println(d1.getVolumen());
                  continuar = false;
             }catch(ExceptionRadio e) {
                 System.out.println("ERROR: introduce el radio nuevamente.");
             }
         }while(continuar);
-        Circunferencia c1 = new Circunferencia(radio)
 
-        Circunferencia d1 = new Circunferencia(5);
-        d1.CalculoDeLongitud();
-        System.out.println(d1.getLongitud());
-        d1.CalculoDeArea();
-        System.out.println(d1.getArea());
-        d1.CalculoDeVolumen();
-        System.out.println(d1.getVolumen());
+
     }
 }
