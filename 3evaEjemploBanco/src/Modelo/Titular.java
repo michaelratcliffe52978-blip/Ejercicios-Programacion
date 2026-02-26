@@ -9,6 +9,8 @@ public class Titular {
 
     //CONSTRUCTORES
     public Titular(String dni, String nombre) {
+        this.dni = dni;
+        this.nombre = nombre;
     }
 
     public Titular(int id, String dni, String nombre) {

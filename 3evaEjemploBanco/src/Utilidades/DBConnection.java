@@ -7,8 +7,7 @@ import java.sql.SQLException;
 public class DBConnection {
 
     //AQUI SE HACEN LAS CONEXIONES A LA BASE DE DATOS
-
-    private static final String URL = "jdbc:mysql://localhost:3306/tu_base_de_datos";
+    private static final String URL = "jdbc:mysql://localhost:3306/bdejemplobanco";
     private static final String USER = "root";
     private static final String PASSWORD = "usbw";
     private static Connection conn = null;

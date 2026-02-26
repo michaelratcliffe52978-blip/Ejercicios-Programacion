@@ -23,7 +23,7 @@ public class TitularDAO {
             ps.setString(2, titular.getNombre());
             ps.executeUpdate();
 
-            System.out.println("Titular insertado correctamente.");
+            System.out.println("(DAO) Titular insertado correctamente.");
             DBConnection.closeConnection();
 
         }catch(Exception e)
