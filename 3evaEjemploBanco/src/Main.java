@@ -5,5 +5,6 @@ public class Main {
         //UNA clase que esta dentro del paquete vista
         MenuTitulares menu = new MenuTitulares();
         menu.mostrarMenu();
+
     }
 }

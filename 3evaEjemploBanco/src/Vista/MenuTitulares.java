@@ -30,6 +30,7 @@ public class MenuTitulares {
             System.out.println("6. Buscar por ID");
             System.out.println("7. Buscar por DNI");
             System.out.println("0. Salir");
+
             opcion = EntradaDatos.leerEntero(sc, "Elige opción: ");
 
             switch (opcion) {
@@ -50,18 +51,30 @@ public class MenuTitulares {
     public void crearTitular() {
         System.out.println("\n=== CREAR TITULAR ===");
         String dni = EntradaDatos.leerTexto(sc,"Ingrese el DNI del titular: ", "^[0-9]{8}[A-Za-z]$");
-        String nombre = EntradaDatos.leerTexto(sc,"Ingrese el nombre del titular: ", "^[A-Za-z ]+$");
-        titularController.crearTitular(dni, nombre);
-        System.out.println("Titular creado correctamente.");
+        if(dni!= null) {
+            String nombre = EntradaDatos.leerTexto(sc,"Ingrese el nombre del titular: ", "^[A-Za-z ]+$");
+            titularController.crearTitular(dni, nombre);
+            System.out.println("Titular creado correctamente.");
+        }
 
 
     }
+
     public void modificarTitular() {
+        System.out.println("\n=== MODIFICAR TITULAR ===");
+        Titular titular = buscarPorDni();
+        if(titular != null) {
+            String nuevoNombre = EntradaDatos.leerTexto(sc,"Ingrese el nuevo nombre del titular: ", "^[A-Za-z ]+$");
+            titular.setNombre(nuevoNombre);
+            // Aquí podrías agregar lógica para actualizar el titular en la base de datos
+            System.out.println("Titular modificado correctamente.");
+        }
+    }
+
+    public  void borrarTitular() {
 
     }
 
-
-    public  void borrarTitular() {}
     public void listarTitulares() {
         System.out.println("\n=== LISTAR TITULARES ===");
         List<Titular> titulares = titularController.listarTitular();
@@ -75,9 +88,51 @@ public class MenuTitulares {
             }
         }
     }
-    public void listarPorNombre() {}
-    public void buscarPorId() {}
-    public void buscarPorDni() {}
+
+    private void listarPorNombre() {
+        System.out.println("\n=== LISTAR TITULARES POR NOMBRE ===");
+        String nombre = EntradaDatos.leerTexto(sc, "Ingrese el nombre a buscar: ", "^[A-Za-z ]+$");
+        if (nombre != null) {
+            // Variable global?
+            StringBuilder sb = titularController.buscarPorNombre(nombre);
+            if (!sb.isEmpty()) {
+                System.out.println(sb.toString());
+            } else {
+                System.out.println("No se encontró ningún titular con el nombre proporcionado.");
+            }
+        }
+    }
+
+    private Titular buscarPorId() {
+        System.out.println("\n=== BUSCAR TITULAR POR ID ===");
+        int id = EntradaDatos.leerEntero(sc,"Ingrese el ID del titular: ");
+        if(id != -1) {
+            Titular titular = titularController.buscarPorId(id);
+            if (titular != null) {
+                System.out.println("Titular encontrado: " + titular);
+            } else {
+                System.out.println("No se encontró ningún titular con ese ID.");
+            }
+            return titular;
+        }
+        return null;
+    }
+
+    private Titular buscarPorDni() {
+        System.out.println("\n=== BUSCAR TITULAR POR DNI ===");
+        String dni = EntradaDatos.leerTexto(sc,"Ingrese el DNI del titular: ", "^[0-9]{8}[A-Za-z]$");
+        if(dni != null) {
+            Titular titular = titularController.buscarPorDni(dni);
+            if (titular != null) {
+                System.out.println("Titular encontrado: " + titular);
+            } else {
+                System.out.println("No se encontró ningún titular con ese DNI.");
+            }
+            return titular;
+
+        }
+        return null;
+    }
 
 
 }

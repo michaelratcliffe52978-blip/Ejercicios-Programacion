@@ -59,25 +59,127 @@ public class TitularDAO {
         return listar;
     }
 
-    //DELETE
-    public void eliminar(int id){
-        String sql = "DELETE FROM titular WHERE id = ?";
+    //SELECTS -> X ID
+
+    public Titular buscarPorId(int id) {
+        String sql = "SELECT * FROM titulares WHERE id = ?";
 
         try {
             Connection conn = DBConnection.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setInt(1, id);
-            ps.executeUpdate();
+            ResultSet rs = ps.executeQuery();
 
-            ps.close();
-            conn.close();
+            if (rs.next()) {
+                return new Titular(
+                        rs.getInt("id"),
+                        rs.getString("dni"),
+                        rs.getString("nombre")
+                );
+            }
+            DBConnection.closeConnection();
 
-            System.out.println("Eliminado correctamente");
+        }
+        catch (Exception e)
+        {
+            System.out.println(" (DAO) Error al buscar titular: " + e.getMessage());
+        }
+
+        return null;
+    }
+
+
+    //SELECTS -> X DNI
+
+    public Titular buscarPorDni(String dni) {
+        String sql = "SELECT * FROM titulares WHERE dni = ?";
+
+        try {
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, dni);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return new Titular(
+                        rs.getInt("id"),
+                        rs.getString("dni"),
+                        rs.getString("nombre")
+                );
+            }
+            DBConnection.closeConnection();
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(" (DAO) Error al buscar titular por dni: " + e.getMessage());
+        }
+
+        return null;
+    }
+    //SELECTS -> X NOMBRE
+
+    public ArrayList<Titular> buscarPorNombre(String nombre) {
+        String sql = "SELECT * FROM titulares WHERE nombre = ?";
+
+        try {
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, nombre);
+            ResultSet rs = ps.executeQuery();
+
+            ArrayList<Titular> lista = new ArrayList<>();
+
+            while (rs.next()) {
+                lista.add(new Titular(
+                        rs.getInt("id"),
+                        rs.getString("dni"),
+                        rs.getString("nombre")
+                ));
+            }
+
+            DBConnection.closeConnection();
+            return lista;
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("(DAO) Error al buscar titulares por nombre: " + e.getMessage());
+        }
+
+        return null;
+    }
+
+
+
+    //DELETE
+    public int eliminar(int id){
+        String sql = "DELETE FROM titular WHERE id = ?";
+        int n = 0;
+        try {
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, id);
+            n = ps.executeUpdate();
+
+            if (n != 1) {
+                System.out.println(" (DAO) Titular no borrado.");
+                // Mensaje para el usuario
+                throw new Exception(" No se encontró ningún titular con el ID proporcionado.");
+            }
+            else
+            {
+                System.out.println(" (DAO) Titular borrado correctamente.");
+            }
 
         }catch(Exception e){
             System.out.println("Error en eliminar: " + e.getMessage());
         }
+
     }
 
     //UPDATE
