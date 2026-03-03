@@ -1,9 +1,8 @@
-import Vista.MenuTitulares;
+import Vista.MenuPrincipal;
 
 public class Main {
     public static void main(String[] args) {
-        //UNA clase que esta dentro del paquete vista
-        MenuTitulares menu = new MenuTitulares();
+        MenuPrincipal menu = new MenuPrincipal();
         menu.mostrarMenu();
 
     }

@@ -72,6 +72,34 @@ public class MenuTitulares {
     }
 
     public  void borrarTitular() {
+        System.out.println("\n=== BORRAR TITULAR ===");
+        try
+        {
+            // id o dni? Se puede hacer de las dos formas.
+            int id = EntradaDatos.leerEntero(sc, "Introduce id del titular a borrar: ");
+            if (id != -1)
+            {
+                // Si es -1, ya hemos mostrado un mensaje de error en la función leerEntero, así que no hace falta mostrar otro aquí.
+                // LLamar al controlador para borrar el titular por ID
+                int n= titularController.borrarTitular(id);
+                if (n==1)
+                {
+                    // Mensaje para que el usuario sepa que se ha borrado correctamente
+                    System.out.println("Titular borrado correctamente.");
+                }
+                else {
+                    // Mensaje para el usuario para que sepa que no se ha encontrado el titular con el ID proporcionado
+                    System.out.println("No se encontró ningún titular con el ID proporcionado.");
+                }
+
+            }
+
+        }
+        catch (Exception e)
+        {
+            // Mensaje para el usuario para que sepa que ha habido un error al borrar el titular
+            System.out.println("Problemas borrando el titular");
+        }
 
     }
 

@@ -50,4 +50,10 @@ public class EntradaDatos {
             return "";
         }
     }
+
+    public static boolean validacionIBAN(String iban) {
+        // Validar que sea un IBAN español (ES) con 24 caracteres
+        // Formato: ES + 2 dígitos de control + 4 dígitos de banco + 4 dígitos de sucursal + 1 dígito de control + 10 dígitos de cuenta
+        return iban != null && iban.matches("^ES\\d{22}$");
+    }
 }

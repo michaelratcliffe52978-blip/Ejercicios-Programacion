@@ -156,10 +156,12 @@ public class TitularDAO {
 
 
     //DELETE
-    public int eliminar(int id){
-        String sql = "DELETE FROM titular WHERE id = ?";
-        int n = 0;
-        try {
+    public int eliminar(int id) throws Exception{
+        String sql = "DELETE FROM titulares WHERE ID = ?";
+
+        int n=0;
+        try
+        {
             Connection conn = DBConnection.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -176,12 +178,17 @@ public class TitularDAO {
                 System.out.println(" (DAO) Titular borrado correctamente.");
             }
 
-        }catch(Exception e){
-            System.out.println("Error en eliminar: " + e.getMessage());
         }
-
+        catch (Exception e)
+        {
+            System.out.println(" (DAO) Error al borrar titular: " + e.getMessage());
+        }
+        finally
+        {
+            DBConnection.closeConnection();
+            return n;
+        }
     }
-
     //UPDATE
     public void actualizar(Titular titular){
         String sql = "UPDATE titular SET nombre = ?, dni = ? WHERE id = ?";
