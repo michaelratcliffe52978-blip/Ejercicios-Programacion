@@ -60,7 +60,6 @@ public class TitularDAO {
     }
 
     //SELECTS -> X ID
-
     public Titular buscarPorId(int id) {
         String sql = "SELECT * FROM titulares WHERE id = ?";
 
