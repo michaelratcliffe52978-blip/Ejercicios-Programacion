@@ -21,6 +21,8 @@ public class PasajeroController {
     public static boolean eliminarPasajero(String dni) {
         return PasajeroDAO.eliminar(dni);
     }
+
+    //Modificar pasajero por DNI
     public static void modificarPasajero(String dni, String nuevoNombre, String nuevoTelefono, String nuevoCodVuelo) {
         Pasajero pasajeroExistente = obtenerPasajeroPorDni(dni);
         if (pasajeroExistente != null) {

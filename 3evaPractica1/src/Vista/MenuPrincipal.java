@@ -19,7 +19,7 @@ public class MenuPrincipal {
             System.out.println("====== MENÚ PRINCIPAL  ======");
             System.out.println("1. MENÚ GESTIÓN DE VUELOS");
             System.out.println("2. MENÚ GESTIÓN DE PASAJEROS");
-            System.out.println("3. MENÚ CONSULTAS AEROLÍNEA");
+            System.out.println("3. MENÚ DE CONSULTAS VARIAS");
             System.out.println("0. Salir");
 
             opcion = EntradaDatos.leerEntero(sc, "Elige opción: ");

@@ -1,5 +1,7 @@
 package Utilidades;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class EntradaDatos {
@@ -51,6 +53,28 @@ public class EntradaDatos {
         }
     }
 
+    public static String validarFecha(Scanner sc, String mensaje,String formato) {
+        try
+        {
+            String texto;
+            do
+            {
+                System.out.print(mensaje);
+                texto = sc.nextLine();
+
+               if (!texto.matches(formato))
+                {
+                    System.out.println("Error: formato no válido. Inténtalo de nuevo.");
+                }
+            } while (!texto.matches(formato));
+            return texto;
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error leyendo el texto: " + e.getMessage());
+            return "";
+        }
+    }
 
 
 }

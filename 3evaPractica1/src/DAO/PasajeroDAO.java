@@ -68,6 +68,8 @@ public class PasajeroDAO {
             ps.setString(1, dni);
             int resultado = ps.executeUpdate();
 
+            System.out.println("(DAO) Pasajero eliminado correctamente de la BD.");
+
             AerolineaConnection.closeConnection();
             return resultado > 0;
 
@@ -93,9 +95,9 @@ public class PasajeroDAO {
             AerolineaConnection.closeConnection();
 
             if (resultado > 0) {
-                System.out.println("Pasajero modificado correctamente.");
+                System.out.println("(DAO) Pasajero modificado correctamente.");
             } else {
-                System.out.println("No se encontró el pasajero para modificar.");
+                System.out.println("(DAO) No se encontró el pasajero para modificar.");
             }
         } catch (Exception e) {
             System.out.println("Error al modificar pasajero: " + e.getMessage());
